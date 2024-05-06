@@ -12,8 +12,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // looks for public folder
 app.use(express.static('public'));
-app.use('/', htmlRoutes);
 app.use('/api', apiRoutes);
+app.use('/', htmlRoutes);
+
 
 // server listens for requests
 app.listen(PORT, () =>

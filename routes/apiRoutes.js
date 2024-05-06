@@ -1,13 +1,16 @@
 const router = require("express").Router();
 const path = require("path");
-const fs = require('fs');
-
-router.get("api/notes", (req, res) => {
+const fs = require("fs");
+const db = require("../db/store");
+router.get("/notes", (req, res) => {
   // get from db.json
-  res.sendFile(path.join(__dirname, "../db/db.json"));
+  console.log("getting notes");
+  fs.readFile(path.join(__dirname, "../db/db.json"),"utf8",(err, data) => {
+    res.json(JSON.parse(data));
+  });
 });
 
-router.post("api/notes", (req, res) => {
+router.post("/notes", (req, res) => {
   let db = fs.readFileSync("db/db.json");
   db = JSON.parse(db);
   res.json(db);
